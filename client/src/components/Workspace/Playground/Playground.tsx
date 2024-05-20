@@ -4,8 +4,11 @@ import Split from "react-split";
 import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import { javascript } from "@codemirror/lang-javascript";
+import { cpp } from "@codemirror/lang-cpp";
+import { java } from "@codemirror/lang-java";
+import { python } from "@codemirror/lang-python";
 import EditorFooter from "./EditorFooter";
-import { Problem } from "@/utils/types/problem";
+import { Problem,StarterCode } from "@/utils/types/problem";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, firestore } from "@/firebase/firebase";
 import { toast } from "react-toastify";
@@ -13,7 +16,7 @@ import { problems } from "@/utils/problems";
 import { useRouter } from "next/router";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import useLocalStorage from "@/hooks/useLocalStorage";
-
+import { ImSpinner } from "react-icons/im";
 type PlaygroundProps = {
 	problem: Problem;
 	setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,22 +25,27 @@ type PlaygroundProps = {
 
 export interface ISettings {
 	fontSize: string;
+	lang: string;
 	settingsModalIsOpen: boolean;
 	dropdownIsOpen: boolean;
+	dropdownLangIsOpen: boolean;
+	
 }
 
 const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved }) => {
 	const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
-	let [userCode, setUserCode] = useState<string>(problem.starterCode);
-
-	const [fontSize, setFontSize] = useLocalStorage("lcc-fontSize", "16px");
-
+	const [updating,setUpdating] = useState<boolean>(false);
+	const [fontSize] = useLocalStorage("vc-fontSize", "16px");
+	const [lang] = useLocalStorage("vc-lang", "Javascript");
 	const [settings, setSettings] = useState<ISettings>({
 		fontSize: fontSize,
+		lang: lang,
 		settingsModalIsOpen: false,
 		dropdownIsOpen: false,
+		dropdownLangIsOpen: false,
 	});
-
+	let [userCode, setUserCode] = useState<string>(problem.starterCode[settings.lang]);
+	// console.table(settings)
 	const [user] = useAuthState(auth);
 	const {
 		query: { pid },
@@ -98,32 +106,61 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
 	};
 
 	useEffect(() => {
-		const code = localStorage.getItem(`code-${pid}`);
-		if (user) {
-			setUserCode(code ? JSON.parse(code) : problem.starterCode);
-		} else {
-			setUserCode(problem.starterCode);
+		const item = localStorage.getItem(`code-${pid}`);
+		if(item !== null){
+			const code:StarterCode = JSON.parse(item);
+			if (user) {
+				setUserCode(code ? code[settings.lang] : problem.starterCode[settings.lang]);
+			} else {
+				setUserCode(problem.starterCode[settings.lang]);
+			}
+		}else{
+			const data = {
+				"Java":problem.starterCode["Java"],
+				"Python":problem.starterCode["Python"],
+				"C++":problem.starterCode["C++"],
+				"Javascript":problem.starterCode["Javascript"]
+			}
+			localStorage.setItem(`code-${pid}`, JSON.stringify(data));
 		}
-	}, [pid, user, problem.starterCode]);
+		
+	}, [pid, user, problem.starterCode,settings]);
 
 	const onChange = (value: string) => {
-		setUserCode(value);
-		localStorage.setItem(`code-${pid}`, JSON.stringify(value));
+		const item = localStorage.getItem(`code-${pid}`)
+		if(item !== null){
+			const code:StarterCode = JSON.parse(item);
+			const newCode = {
+				...code,[settings.lang]:value
+			}
+			localStorage.setItem(`code-${pid}`, JSON.stringify(newCode));
+		}
 	};
-
+	//Changing the updating state(De-bouncing)
+	useEffect(()=>{
+		const timer:NodeJS.Timeout = setTimeout(()=>{
+			setUpdating(true);
+			onChange(userCode);
+			setTimeout(()=>{
+				setUpdating(false);
+			},1500);
+		},1000);
+		return () => clearTimeout(timer);
+	},[userCode])
 	return (
 		<div className='flex flex-col bg-dark-layer-1 relative overflow-x-hidden'>
 			<PreferenceNav settings={settings} setSettings={setSettings} />
 
 			<Split className='h-[calc(100vh-94px)]' direction='vertical' sizes={[60, 40]} minSize={60}>
-				<div className='w-full overflow-auto'>
+				<div className='w-full overflow-auto relative rounded'>
 					<CodeMirror
 						value={userCode}
 						theme={vscodeDark}
-						onChange={onChange}
-						extensions={[javascript()]}
+						onChange={(val)=>setUserCode(val)}
+						extensions={settings.lang === "C++"?[cpp()]:settings.lang === "Java"?[java()]:settings.lang === "Python"?[python()]:[javascript()]}
 						style={{ fontSize: settings.fontSize }}
 					/>
+					<div className="text-white absolute ml-1 mb-1 bottom-1 text-xs">{updating?<span className="flex items-center gap-1"><ImSpinner className="animate-spin" /><span>saving...</span></span>:"saved"}</div>
 				</div>
 				<div className='w-full px-5 overflow-auto'>
 					{/* testcase heading */}

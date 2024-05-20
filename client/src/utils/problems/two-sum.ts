@@ -1,9 +1,20 @@
 import assert from "assert";
-import { Problem } from "../types/problem";
+import { Problem,StarterCode } from "../types/problem";
 
-const starterCodeTwoSum = `function twoSum(nums,target){
-  // Write your code here
-};`;
+const starterCodeTwoSum:StarterCode = {
+	"Javascript":`function twoSum(nums,target){
+	// Write your code here
+};`,
+	  "Python":` def twoSum(self, nums: List[int], target: int) -> List[int]:
+	  # Write your code here`,
+	  "C++":`vector<int> twoSum(vector<int>& nums, int target){
+    // Write your code here
+}`,
+	  "Java":`public int[] twoSum(int[] nums, int target) {
+    // Write your code here
+}`,
+
+};
 
 // checks if the user has the correct code
 const handlerTwoSum = (fn: any) => {

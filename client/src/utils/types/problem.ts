@@ -14,11 +14,13 @@ export type Problem = {
 	examples: Example[];
 	constraints: string;
 	order: number;
-	starterCode: string;
+	starterCode: StarterCode;
 	handlerFunction: ((fn: any) => boolean) | string;
 	starterFunctionName: string;
 };
-
+export type StarterCode = {
+	[key:string]:string
+}
 export type DBProblem = {
 	id: string;
 	title: string;
