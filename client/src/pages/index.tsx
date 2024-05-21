@@ -1,66 +1,33 @@
-import ProblemsTable from "@/components/ProblemsTable/ProblemsTable";
+import InterviewPoster from "@/components/InterviewPoster/InterviewPoster";
+import ProblemList from "@/components/ProblemList/ProblemList";
+import StudyPlans from "@/components/StudyPlans/StudyPlans";
 import Topbar from "@/components/Topbar/Topbar";
 import useHasMounted from "@/hooks/useHasMounted";
 
-import { useState } from "react";
-
 export default function Home() {
-	const [loadingProblems, setLoadingProblems] = useState(true);
 	const hasMounted = useHasMounted();
-
 	if (!hasMounted) return null;
 
 	return (
 		<>
 			<main className='bg-dark-layer-2 min-h-screen'>
 				<Topbar />
-				<div className='relative overflow-x-auto md:w-[70%] w-full md:px-1'>
-					{loadingProblems && (
-						<div className='max-w-[1200px] mx-auto sm:w-7/12 w-full animate-pulse'>
-							{[...Array(10)].map((_, idx) => (
-								<LoadingSkeleton key={idx} />
-							))}
-						</div>
-					)}
-					<table className='text-sm text-left text-gray-500 dark:text-gray-400 sm:w-7/12 w-full max-w-[1200px]'>
-						{!loadingProblems && (
-							<thead className='text-xs text-gray-700 uppercase dark:text-gray-400 border-b'>
-								<tr>
-									<th scope='col' className='px-1 py-3 w-0 font-medium'>
-										Status
-									</th>
-									<th scope='col' className='px-6 py-3 w-0 font-medium'>
-										Title
-									</th>
-									<th scope='col' className='px-12 py-3 w-0 font-medium'>
-										Difficulty
-									</th>
-
-									<th scope='col' className='px-6 py-3 w-0 font-medium'>
-										Category
-									</th>
-									<th scope='col' className='px-6 py-3 w-0 font-medium'>
-										Solution
-									</th>
-								</tr>
-							</thead>
-						)}
-						<ProblemsTable setLoadingProblems={setLoadingProblems} />
-					</table>
-				</div>
+				<div className="flex overflow-y-auto md:flex-row flex-col p-1 main-h">
+					{/* Left-Side Part */}
+					<div className="flex h-full w-full md:w-[70%] flex-col">
+						<div className=" w-full"><InterviewPoster /></div>
+						<div className=" w-full"><StudyPlans /></div>
+						<div className=" w-full"><ProblemList /></div>
+					</div>
+					{/* Right-Side Part */}
+					<div className="flex h-full w-full md:w-[30%] bg-yellow-500 flex-col p-1 justify-between">
+						<div className="w-full h-[40%]">Calander</div>
+						<div className="w-full h-[60%]">Company</div>
+					</div>
+				</div>		
 			</main>
 		</>
 	);
 }
 
-const LoadingSkeleton = () => {
-	return (
-		<div className='flex items-center space-x-12 mt-4 px-6'>
-			<div className='w-6 h-6 shrink-0 rounded-full bg-dark-layer-1'></div>
-			<div className='h-4 sm:w-52  w-32  rounded-full bg-dark-layer-1'></div>
-			<div className='h-4 sm:w-52  w-32 rounded-full bg-dark-layer-1'></div>
-			<div className='h-4 sm:w-52 w-32 rounded-full bg-dark-layer-1'></div>
-			<span className='sr-only'>Loading...</span>
-		</div>
-	);
-};
+
