@@ -42,18 +42,18 @@ function StudyPlans({}: Props) {
         },
     ]
   return (
-    <div className="flex flex-col gap-1 p-3 md:pl-24 pl-10 w-full">
+    <div className="flex flex-col gap-1 p-3 md:pl-24 pl-5 w-full h-auto">
       <div className="flex justify-between p-1 items-center mb-2">
         <span className="text-gray-300 font-medium text-2xl">Study Plan</span>
         <span className=" text-blue-500 cursor-pointer">See all</span>
       </div>
-      <div className="grid grid-cols-3 w-full gap-3">
+      <div className="grid grid-cols-1 h-auto md:grid-cols-3 w-full gap-3">
       {studyPlans.map((e,idx)=>
-        <div className="flex gap-3 items-center p-3 bg-gray-800 cursor-pointer rounded-md py-5">
-        <Image src={`/${e.img}`} width={50} height={50} alt='Image' key={idx} className='rounded-md cursor-pointer' />
+        <div className="flex gap-3 items-center p-3 bg-dark-layer-1 cursor-pointer rounded-md py-5">
+        <Image src={`/${e.img}`} width={70} height={70} alt='Image' key={idx} className='rounded-md cursor-pointer pointer-events-none' />
         <div className="flex flex-col p-1 gap-2 text-white">
         <span className="font-sans">{e.text1}</span>
-        <span className="font-thin font-serif text-xs">{e.text2}</span>
+        <span className="font-serif text-xs opacity-50">{e.text2}</span>
         </div>
         </div>
         )}

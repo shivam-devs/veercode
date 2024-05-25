@@ -58,12 +58,12 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({
               className={`${idx % 2 == 1 ? "bg-dark-layer-1" : ""}`}
               key={problem.id}
             >
-              <th className="px-2 py-4 font-medium whitespace-nowrap text-dark-green-s">
+              <th className="pl-2 py-4 font-medium whitespace-nowrap text-dark-green-s">
                 {solvedProblems.includes(problem.id) && (
                   <BsCheckCircle fontSize={"18"} width="18" />
                 )}
               </th>
-              <td className="px-6 py-4">
+              <td className="pl-10 py-4">
                 <Link
                   className="hover:text-blue-600 w-[100px] cursor-pointer"
                   href={`/problems/${problem.id}`}
@@ -71,11 +71,11 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({
                   <div className="w-52">{problem.title}</div>
                 </Link>
               </td>
-              <td className={`px-16 py-4 ${difficulyColor}`}>
+              <td className={`pl-56 py-4 ${difficulyColor}`}>
                 {problem.difficulty}
               </td>
-              <td className={"px-8 py-4"}>{problem.category}</td>
-              <td className={"px-8 py-4"}>
+              <td className={"pl-36 py-4"}>{problem.category}</td>
+              <td className={"pl-36 pr-28 py-4"}>
                 {problem.videoId ? (
                   <AiFillYoutube
                     fontSize={"28"}
