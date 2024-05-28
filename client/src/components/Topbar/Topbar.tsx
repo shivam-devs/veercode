@@ -1,47 +1,47 @@
 import { auth } from "@/firebase/firebase";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Logout from "../Buttons/Logout";
 import { useSetRecoilState } from "recoil";
 import { authModalState } from "@/atoms/authModalAtom";
 import Image from "next/image";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight,FaBarcode } from "react-icons/fa";
+import { IoMenu } from "react-icons/io5";
 import { BsList } from "react-icons/bs";
 import Timer from "../Timer/Timer";
 import { useRouter } from "next/router";
 import { problems } from "@/utils/problems";
 import { Problem } from "@/utils/types/problem";
-import { Router } from "next/router";
+import useWindowSize from "@/hooks/useWindowSize";
 type TopbarProps = {
   problemPage?: boolean;
 };
 type navLinksProp = {
-	name:string,
-	path:string
-}
+  name: string;
+  path: string;
+};
 const navLinks: navLinksProp[] = [
-  {name:"Problems",
-	path:"/"
-  },
-  {name:"Contest",
-	path:"/contest"
-  },
-  {name:"Discuss",
-	path:"/discuss"
-  },
-  {name:"Interview",
-	path:"/interview"
-  },
-  {name:"Store",
-	path:"/store"
-  }
+  { name: "Problems", path: "/" },
+  { name: "Contest", path: "/contest" },
+  { name: "Discuss", path: "/discuss" },
+  { name: "Interview", path: "/interview" },
+  { name: "Store", path: "/store" },
 ];
 const Topbar: React.FC<TopbarProps> = ({ problemPage }) => {
+  const windowSize = useWindowSize();
+  const [mobShow, setMobShow] = useState<boolean>();
   const [user] = useAuthState(auth);
   const setAuthModalState = useSetRecoilState(authModalState);
   const router = useRouter();
   const [path] = useState<string>(router.pathname);
+  useEffect(() => {
+    if (windowSize.width <= 768) {
+      setMobShow(false);
+    } else {
+      setMobShow(true);
+    }
+  }, [windowSize]);
   const handleProblemChange = (isForward: boolean) => {
     const { order } = problems[router.query.pid as string] as Problem;
     const direction = isForward ? 1 : -1;
@@ -69,15 +69,28 @@ const Topbar: React.FC<TopbarProps> = ({ problemPage }) => {
     <nav className="relative flex h-[55px] w-full shrink-0 items-center px-5 bg-dark-layer-1 text-dark-gray-7">
       <div className={`flex w-full items-center justify-between`}>
         <Link href="/" className="h-[22px] -mt-24">
-          <Image src="/logo-full.png" alt="Logo" height={130} width={130} />
+          <Image src="/logo-full.png" alt="Logo" height={130} width={130} className="cursor-pointer" />
         </Link>
-        {!problemPage && (
-          <div className={`md:flex items-center gap-3 text-gray-500 w-[40%] pl-5 hidden font-sans font-medium pt-3`}>
-			{navLinks.map((link,idx)=><Link href={link.path} key={idx} className={`${path === link.path ? "text-white border-white border-b-2 pb-1 transition-all ease-linear duration-100":""}`}>
-			{link.name}
-			</Link>)}
-		  </div>
+        {mobShow && (
+          <div
+            className={`z-50 flex items-center gap-3 text-gray-500 w-auto px-5 py-3 md:py-0 md:mt-3 mt-0 md:pl-5 md:relative absolute top-14 md:top-0  md:flex-row flex-col font-sans font-medium`}
+          >
+            {navLinks.map((link, idx) => (
+              <Link
+                href={link.path}
+                key={idx}
+                className={`${
+                  path === link.path
+                    ? "text-white border-white border-b-2 transition-all ease-linear duration-100"
+                    : ""
+                } text-lg font-medium pb-4`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
         )}
+
         {problemPage && (
           <div className="items-center gap-4 flex-1 hidden md:flex justify-center">
             <div
@@ -151,6 +164,7 @@ const Topbar: React.FC<TopbarProps> = ({ problemPage }) => {
             </div>
           )}
           {user && <Logout />}
+          <IoMenu className="text-2xl cursor-pointer md:hidden" onClick={()=>setMobShow((prev)=>!prev)}/>
         </div>
       </div>
     </nav>

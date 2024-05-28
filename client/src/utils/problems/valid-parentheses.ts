@@ -1,5 +1,5 @@
 import assert from "assert";
-import { Problem } from "../types/problem";
+import { Problem, StarterCode } from "../types/problem";
 
 export const validParenthesesHandler = (fn: any) => {
 	try {
@@ -16,9 +16,20 @@ export const validParenthesesHandler = (fn: any) => {
 	}
 };
 
-const starterCodeValidParenthesesJS = `function validParentheses(s) {
-  // Write your code here
-};`;
+const starterCodeValidParentheses:StarterCode ={
+	"Javascript":`function validParentheses(s) {
+		// Write your code here
+};`,
+	  "Python":` def twoSum(self, nums: List[int], target: int) -> List[int]:
+	  # Write your code here`,
+	  "C++":`vector<int> twoSum(vector<int>& nums, int target){
+    // Write your code here
+}`,
+	  "Java":`public int[] twoSum(int[] nums, int target) {
+    // Write your code here
+}`,
+
+};
 
 export const validParentheses: Problem = {
 	id: "valid-parentheses",
@@ -51,7 +62,7 @@ export const validParentheses: Problem = {
 	constraints: `<li class='mt-2'><code>1 <= s.length <= 10<sup>4</sup></code></li>
 <li class='mt-2 '><code>s</code> consists of parentheses only <code class="text-md">'()[]{}'</code>.</li>`,
 	handlerFunction: validParenthesesHandler,
-	starterCode: starterCodeValidParenthesesJS,
-	starterFunctionName: "function validParentheses(",
+	starterCode: starterCodeValidParentheses,
 	order: 4,
+	starterFunctionName: "function validParentheses(",
 };

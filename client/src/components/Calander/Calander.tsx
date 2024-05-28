@@ -5,7 +5,7 @@ type CalanderProps = {};
 
 function Calander({}: CalanderProps) {
   return (
-    <div className="h-full w-[70%] select-none text-gray-400 bg-dark-layer-1 flex flex-col items-center justify-center p-3 px-5 rounded-xl relative shadow hover:shadow-gray-500 transition-all">
+    <div className="h-full w-auto select-none z-0 text-gray-400 bg-dark-layer-1 flex flex-col items-center justify-center p-3 px-5 rounded-xl relative shadow hover:shadow-gray-500 transition-all">
       <span className="w-full font-sans font-semibold">Day 21</span>
       <div className="absolute -top-28 right-0">
         <Image src="/calander.png" width={130} height={130} alt="image" className="pointer-events-none"/>

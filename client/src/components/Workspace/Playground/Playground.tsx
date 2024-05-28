@@ -104,6 +104,15 @@ const Playground: React.FC<PlaygroundProps> = ({
       });
       return;
     }
+    
+    if (settings.lang == "C++"||settings.lang == "Java"||settings.lang == "Python") {
+      toast.error("This language is not supported yet", {
+        position: "top-center",
+        autoClose: 3000,
+        theme: "dark",
+      });
+      return;
+    }
     try {
       userCode = userCode.slice(userCode.indexOf(problem.starterFunctionName));
       const cb = new Function(`return ${userCode}`)();
@@ -222,7 +231,7 @@ const Playground: React.FC<PlaygroundProps> = ({
             }
             style={{ fontSize: settings.fontSize }}
           />
-          <div className="text-white absolute ml-1 mb-1 bottom-1 text-xs">
+          <div className="text-white absolute ml-1 mb-1 bottom-0 text-xs">
             {updating ? (
               <span className="flex items-center gap-1">
                 <ImSpinner className="animate-spin" />

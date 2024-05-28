@@ -65,17 +65,17 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({
               </th>
               <td className="pl-10 py-4">
                 <Link
-                  className="hover:text-blue-600 w-[100px] cursor-pointer"
+                  className="hover:text-blue-600 w-auto cursor-pointer"
                   href={`/problems/${problem.id}`}
                 >
-                  <div className="w-52">{problem.title}</div>
+                  <div className="w-72">{problem.title}</div>
                 </Link>
               </td>
-              <td className={`pl-56 py-4 ${difficulyColor}`}>
+              <td className={`pl-60 py-4 ${difficulyColor}`}>
                 {problem.difficulty}
               </td>
               <td className={"pl-36 py-4"}>{problem.category}</td>
-              <td className={"pl-36 pr-28 py-4"}>
+              <td className={"pl-40 pr-28 py-4"}>
                 {problem.videoId ? (
                   <AiFillYoutube
                     fontSize={"28"}
@@ -88,7 +88,7 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({
                     }
                   />
                 ) : (
-                  <p className="text-gray-400">Coming soon</p>
+                  <p className="text-gray-400 text-center">Coming soon</p>
                 )}
               </td>
             </tr>
@@ -96,13 +96,13 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({
         })}
       </tbody>
       {youtubePlayer.isOpen && (
-        <tfoot className="fixed top-0 left-0 h-screen w-screen flex items-center justify-center">
+        <tfoot className="fixed top-0 left-0 h-screen w-screen flex items-center justify-start md:pl-20">
           <div
             className="bg-black z-10 opacity-70 top-0 left-0 w-screen h-screen absolute"
             onClick={closeModal}
           ></div>
-          <div className="w-full z-50 h-full px-6 relative max-w-4xl">
-            <div className="w-full h-full flex items-center justify-center relative">
+          <div className="w-full z-20 h-full px-6 relative max-w-4xl">
+            <div className="w-full h-full flex items-center relative">
               <div className="w-full relative">
                 <IoClose
                   fontSize={"35"}

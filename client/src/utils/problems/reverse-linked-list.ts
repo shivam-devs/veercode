@@ -64,18 +64,48 @@ function getListValues(head: LinkedList): number[] {
 	return values;
 }
 
-const starterCodeReverseLinkedListJS = `
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-// Do not edit function name
-function reverseLinkedList(head) {
-  // Write your code here
-};`;
+const starterCodeReverseLinkedListJS = {
+	"Javascript": `/**
+	* Definition for singly-linked list.
+	* function ListNode(val, next) {
+	*     this.val = (val===undefined ? 0 : val)
+	*     this.next = (next===undefined ? null : next)
+	* }
+	*/
+   // Do not edit function name
+   function reverseLinkedList(head) {
+	 // Write your code here
+   };`,
+	"Python": `class ListNode:
+	  def __init__(self, val=0, next=None):
+		  self.val = val
+		  self.next = next
+  
+  def reverseList(self, head: ListNode) -> ListNode:
+	  # Write your code here`,
+	"C++": `struct ListNode {
+	  int val;
+	  ListNode *next;
+	  ListNode() : val(0), next(nullptr) {}
+	  ListNode(int x) : val(x), next(nullptr) {}
+	  ListNode(int x, ListNode *next) : val(x), next(next) {}
+  };
+  
+  ListNode* reverseList(ListNode* head) {
+	  // Write your code here
+  }`,
+	"Java": `public class ListNode {
+	  int val;
+	  ListNode next;
+	  ListNode() {}
+	  ListNode(int val) { this.val = val; }
+	  ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+  }
+  
+  public ListNode reverseList(ListNode head) {
+	  // Write your code here
+  }`,
+  };
 
 export const reverseLinkedList: Problem = {
 	id: "reverse-linked-list",

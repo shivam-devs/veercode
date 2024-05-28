@@ -55,7 +55,7 @@ const handlerMaxi= (fn: any) => {
 
 export const maximum_score: Problem = {
 	id: "maximum-score-words-formed-by-letters",
-	title: "6. Maximum Score Words Formed by Letters",
+	title: "11. Maximum Score Words Formed by Letters",
 	problemStatement: `<p class='mt-3'>
     Given a list of <code>words</code> , list of  single <code>letters</code> (might be repeating) and <code>score</code> of every character.
 </p>

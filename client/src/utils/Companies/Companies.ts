@@ -52,7 +52,7 @@ export const companies:companyProp[] = [
         cnt:128
     },
     {
-        name:"Goldman Sachk",
+        name:"Goldman Sache",
         cnt:126
     },
     {

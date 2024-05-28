@@ -15,7 +15,7 @@ export default function Home() {
 		<>
 			<main className='bg-dark-layer-2 min-h-screen select-none'>
 				<Topbar />
-				<div className="flex overflow-y-auto md:flex-row flex-col gap-0 p-1 main-h">
+				<div className="flex overflow-y-auto items-center xl:items-start xl:flex-row flex-col gap-0 p-1 main-h">
 					{/* Left-Side Part */}
 					<div className="flex h-auto w-full md:w-[70%] flex-col">
 						<div className=" w-full"><InterviewPoster /></div>

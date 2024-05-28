@@ -8,7 +8,7 @@ function contest({}: Props) {
     <>
       <main className="bg-dark-layer-2 min-h-screen">
         <Topbar />
-        <div className="text-white">Contest</div>
+        <div className="text-white main-h flex items-center justify-center font-sans md:text-3xl text-sm">Contest</div>
       </main>
     </>
   )

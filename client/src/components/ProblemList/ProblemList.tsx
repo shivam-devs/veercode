@@ -8,7 +8,7 @@ function ProblemList({}: Props) {
   return (
     <div className='relative overflow-x-auto md:pl-24 pl-2 w-full md:px-1'>
 					{loadingProblems && (
-						<div className='max-w-[1200px] mx-auto sm:w-7/12 w-full animate-pulse'>
+						<div className='w-auto animate-pulse'>
 							{[...Array(10)].map((_, idx) => (
 								<LoadingSkeleton key={idx} />
 							))}
@@ -43,12 +43,12 @@ function ProblemList({}: Props) {
 }
 const LoadingSkeleton = () => {
 	return (
-		<div className='flex items-center space-x-12 mt-4 px-6'>
+		<div className='flex items-center w-auto space-x-12 mt-4'>
 			<div className='w-6 h-6 shrink-0 rounded-full bg-dark-layer-1'></div>
-			<div className='h-4 sm:w-52  w-32  rounded-full bg-dark-layer-1'></div>
-			<div className='h-4 sm:w-52  w-32 rounded-full bg-dark-layer-1'></div>
-			<div className='h-4 sm:w-52 w-32 rounded-full bg-dark-layer-1'></div>
-			<span className='sr-only'>Loading...</span>
+			<div className='h-4 sm:w-52  w-64  rounded-full bg-dark-layer-1'></div>
+			<div className='h-4 sm:w-52  w-64 rounded-full bg-dark-layer-1'></div>
+			<div className='h-4 sm:w-52 w-64 rounded-full bg-dark-layer-1'></div>
+			<div className='h-4 sm:w-52 w-64 rounded-full bg-dark-layer-1'></div>
 		</div>
 	);
 };
