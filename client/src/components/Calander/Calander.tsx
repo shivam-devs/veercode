@@ -21,7 +21,7 @@ function Calander({}: CalanderProps) {
           <span>S</span>
         </span>
         <div className="w-full h-auto grid grid-cols-7 items-center justify-between gap-5 px-3 text-xs">
-            {[...Array(30)].map((e,idx)=><span>{idx+1}</span>)}
+            {[...Array(30)].map((e,idx)=><span key={idx}>{idx+1}</span>)}
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import assert from "assert";
-import { Problem } from "../types/problem";
+import { Problem, StarterCode } from "../types/problem";
 
 export const jumpGameHandler = (fn: any) => {
 	try {
@@ -21,9 +21,19 @@ export const jumpGameHandler = (fn: any) => {
 	}
 };
 
-const starterCodeJumpGameJS = `function canJump(nums) {
-  // Write your code here
-};`;
+const starterCodeJumpGameJS:StarterCode = {
+	"Javascript": `function canJump(nums) {
+		// Write your code here
+};`,
+	"Python": `def canJump(self, nums: List[int]) -> int:
+	  # Write your code here`,
+	"C++": `int canJump(vector<int>& nums) {
+	  // Write your code here
+	}`,
+	"Java": `public int canJump(int[] nums) {
+	  // Write your code here
+	}`,
+  };
 
 export const jumpGame: Problem = {
 	id: "jump-game",

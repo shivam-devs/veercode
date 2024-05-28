@@ -49,7 +49,7 @@ function StudyPlans({}: Props) {
       </div>
       <div className="grid grid-cols-1 h-auto md:grid-cols-3 w-full gap-3">
       {studyPlans.map((e,idx)=>
-        <div className="flex gap-3 items-center p-3 bg-dark-layer-1 cursor-pointer rounded-md py-5">
+        <div key={idx} className="flex gap-3 items-center p-3 bg-dark-layer-1 cursor-pointer rounded-md py-5">
         <Image src={`/${e.img}`} width={70} height={70} alt='Image' key={idx} className='rounded-md cursor-pointer pointer-events-none' />
         <div className="flex flex-col p-1 gap-2 text-white">
         <span className="font-sans">{e.text1}</span>

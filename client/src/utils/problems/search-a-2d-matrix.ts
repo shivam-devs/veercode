@@ -1,5 +1,5 @@
 import assert from "assert";
-import { Problem } from "../types/problem";
+import { Problem, StarterCode } from "../types/problem";
 import example1 from "./images/search-a-2d-1.jpg";
 import example2 from "./images/search-a-2d-2.jpg";
 
@@ -34,10 +34,20 @@ export const search2DMatrixHandler = (fn: any) => {
 		throw new Error(error);
 	}
 };
-const starterCodeSearch2DMatrixJS = `// Do not edit function name
-function searchMatrix(matrix, target) {
-  // Write your code here
-};`;
+const starterCodeSearch2DMatrixJS : StarterCode= {
+	"Javascript":`// Do not edit function name
+	function searchMatrix(matrix, target) {
+	  // Write your code here
+};`,
+		  "Python":` def searchMatrix(self, matrix: List[int], target: int) -> List[int]:
+		  # Write your code here`,
+		  "C++":`vector<int> searchMatrix(vector<int>& matrix, int target){
+		// Write your code here
+	}`,
+		  "Java":`public int[] searchMatrix(int[] matrix, int target) {
+		// Write your code here
+	}`	
+};
 
 export const search2DMatrix: Problem = {
 	id: "search-a-2d-matrix",
