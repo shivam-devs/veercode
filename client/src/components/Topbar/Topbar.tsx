@@ -73,7 +73,7 @@ const Topbar: React.FC<TopbarProps> = ({ problemPage }) => {
         </Link>
         {mobShow && (
           <div
-            className={`z-50 flex items-center gap-3 text-gray-500 w-auto px-5 py-3 md:py-0 md:mt-3 mt-0 md:pl-5 md:relative absolute top-14 md:top-0  md:flex-row flex-col font-sans font-medium`}
+            className={`z-50 flex items-center gap-3 text-gray-500 w-auto px-5 py-3 md:py-0 md:mt-3 mt-0 md:pl-5 md:relative absolute top-14 md:top-0  md:flex-row flex-col font-sans font-medium bg-dark-layer-1`}
           >
             {navLinks.map((link, idx) => (
               <Link
